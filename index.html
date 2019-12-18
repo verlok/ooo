@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>OOO msg generator</title>
+    <style>
+      body {
+        margin: 1rem;
+      }
+      .row {
+        margin: 1rem 0;
+      }
+      #oooMsg {
+        padding: 1rem;
+        border: 1px solid #ccc;
+        display: block;
+        box-shadow: inset 0 3px 3px #0003;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Out of office message generator</h1>
+    <div class="row">
+      <label for="oooFrom">Out from</label>
+      <input type="date" id="oooFrom" onchange="generate()" />
+      <label for="oooUntil">until</label>
+      <input type="date" id="oooUntil" onchange="generate()" />
+    </div>
+    <div class="row">
+      <input type="checkbox" id="accessToEmail" checked onchange="generate()" />
+      <label for="accessToEmail">Access to e-mail 📧</label>
+    </div>
+    <div class="row">
+      <input type="checkbox" id="accessToMobile" onchange="generate()" />
+      <label for="accessToMobile">Access to mobile phone 📱</label>
+    </div>
+    <div class="row">
+      <label for="immediateEmail">Contact for immediate assistance</label>
+      <input type="email" id="immediateEmail" onchange="generate()" />
+    </div>
+
+    <h2>Here's your OOO message</h2>
+    <output id="oooMsg" contenteditable
+      >Your OOO message will appear here</output
+    >
+    <p>
+      You can
+      <button onclick="copyToClipboard()">copy it to clipboard</button>
+      for your convenience.
+    </p>
+    <p>Enjoy your leave 👋</p>
+
+    <script>
+      const oooFrom = document.getElementById("oooFrom");
+      const oooUntil = document.getElementById("oooUntil");
+      const oooMsg = document.getElementById("oooMsg");
+      const accessToEmail = document.getElementById("accessToEmail");
+
+      const getImmediateAssistanceMsg = value => {
+        if (!value) return "";
+        return `<p>If you need immediate assistance, please 
+          contact ${value}.</p>`;
+      };
+
+      const getTimeSpanMsg = (from, until) => {
+        if (from === until) {
+          return `on ${from}`;
+        }
+        return `from ${from} until ${until}`;
+      };
+
+      const generate = () => {
+        oooMsg.innerHTML = `
+          <p>Hi,<br>
+          thanks for getting in touch.</p>
+          <p>I will be out of office 
+            ${getTimeSpanMsg(oooFrom.value, oooUntil.value)}
+            with ${accessToEmail.checked ? "limited" : "no"} 
+            access to e-mail.</p>
+            ${getImmediateAssistanceMsg(immediateEmail.value)}
+        `;
+      };
+
+      const setClipboard = text => {
+        navigator.clipboard.writeText(text).then(
+          () => {
+            console.log("Async: Copying to clipboard was successful!");
+          },
+          err => {
+            console.error("Async: Could not copy text: ", err);
+          }
+        );
+      };
+
+      const copyToClipboard = () => {
+        setClipboard(oooMsg.innerText);
+      };
+    </script>
+  </body>
+</html>
