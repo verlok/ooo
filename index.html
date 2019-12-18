@@ -6,14 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>OOO msg generator</title>
     <style>
+      html {
+        box-sizing: border-box;
+      }
+      *,
+      *::after,
+      *::before {
+        box-sizing: inherit;
+      }
       body {
-        margin: 1rem;
+        max-width: 500px;
+        margin: 1rem auto;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"] {
+        font: inherit;
+        padding: 3px;
+        width: 100%;
+      }
+      label {
+        cursor: pointer;
+      }
+      .buttons {
+        display: flex;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        flex-grow: 1;
+      }
+      button:first-child {
+        margin-right: 0.5rem;
+      }
+      #generate {
+        background-color: blue;
+        color: white;
       }
       .row {
         margin: 1rem 0;
       }
       #oooMsg {
-        padding: 1rem;
+        padding: 0 1rem;
         border: 1px solid #ccc;
         display: block;
         box-shadow: inset 0 3px 3px #0003;
@@ -23,33 +58,48 @@
   <body>
     <h1>Out of office message generator</h1>
     <div class="row">
-      <label for="oooFrom">Out from</label>
-      <input type="date" id="oooFrom" onchange="generate()" />
-      <label for="oooUntil">until</label>
+      <label for="oooFrom">Out from</label><br />
+      <input type="date" id="oooFrom" onchange="generate()" /><br />
+      <label for="oooUntil">until</label><br />
       <input type="date" id="oooUntil" onchange="generate()" />
     </div>
     <div class="row">
       <input type="checkbox" id="accessToEmail" checked onchange="generate()" />
-      <label for="accessToEmail">Access to e-mail 📧</label>
+      <label for="accessToEmail">Access to e-mail</label>
     </div>
     <div class="row">
-      <input type="checkbox" id="accessToMobile" onchange="generate()" />
-      <label for="accessToMobile">Access to mobile phone 📱</label>
+      <label for="urgentPhone">Mobile for urgency</label><br />
+      <input type="tel" id="urgentPhone" onchange="generate()" />
     </div>
     <div class="row">
-      <label for="immediateEmail">Contact for immediate assistance</label>
-      <input type="email" id="immediateEmail" onchange="generate()" />
+      <label for="immediateEmail">Contact for immediate assistance</label><br />
+      <input
+        type="email"
+        id="immediateEmail"
+        value="marty.mcfly@present.com"
+        onchange="generate()"
+      />
+    </div>
+    <div class="row">
+      <label for="signature">Signature</label><br />
+      <input
+        type="text"
+        id="signature"
+        value='Dr. Emmett "Doc" Brown'
+        onchange="generate()"
+      />
+    </div>
+    <div class="buttons row">
+      <button id="generate" onclick="generate()">Generate</button>
+      <button id="copyToClipboard" onclick="copyToClipboard()">
+        Copy to clipboard
+      </button>
     </div>
 
-    <h2>Here's your OOO message</h2>
-    <output id="oooMsg" contenteditable
-      >Your OOO message will appear here</output
-    >
-    <p>
-      You can
-      <button onclick="copyToClipboard()">copy it to clipboard</button>
-      for your convenience.
-    </p>
+    <h2>Here's your generated OOO message</h2>
+    <output id="oooMsg" contenteditable>
+      <p>Your OOO message will appear here</p>
+    </output>
     <p>Enjoy your leave 👋</p>
 
     <script>
@@ -57,29 +107,49 @@
       const oooUntil = document.getElementById("oooUntil");
       const oooMsg = document.getElementById("oooMsg");
       const accessToEmail = document.getElementById("accessToEmail");
+      const urgentPhone = document.getElementById("urgentPhone");
+      const immediateEmail = document.getElementById("immediateEmail");
 
-      const getImmediateAssistanceMsg = value => {
+      const getImmediateAssistanceMsg = (value, from, until) => {
         if (!value) return "";
-        return `<p>If you need immediate assistance, please 
-          contact ${value}.</p>`;
+        const isOneDay = from === until;
+        const whenImOoo = isOneDay
+          ? "If you need immediate assistance"
+          : "In my absence";
+        return `<p>${whenImOoo}, please contact ${value}.</p>`;
+      };
+
+      const getUrgentMobileMsg = value => {
+        if (!value) return "";
+        return `<p>If your matter requires my urgent attention, you can reach me directly on ${value}</p>`;
       };
 
       const getTimeSpanMsg = (from, until) => {
-        if (from === until) {
-          return `on ${from}`;
-        }
-        return `from ${from} until ${until}`;
+        const isOneDay = from === until;
+        return isOneDay ? `on ${from}` : `from ${from} until ${until}`;
+      };
+
+      const getSignature = value => {
+        if (!value) return "";
+        return `<p>${value}</p>`;
       };
 
       const generate = () => {
         oooMsg.innerHTML = `
           <p>Hi,<br>
           thanks for getting in touch.</p>
-          <p>I will be out of office 
+          <p>I will be out of office
             ${getTimeSpanMsg(oooFrom.value, oooUntil.value)}
-            with ${accessToEmail.checked ? "limited" : "no"} 
+            with ${accessToEmail.checked ? "limited" : "no"}
             access to e-mail.</p>
-            ${getImmediateAssistanceMsg(immediateEmail.value)}
+            <p>I will respond to your email upon my return.
+            ${getImmediateAssistanceMsg(
+              immediateEmail.value,
+              oooFrom.value,
+              oooUntil.value
+            )}</p>
+            ${getUrgentMobileMsg(urgentPhone.value)}
+            ${getSignature(signature.value)}
         `;
       };
 
@@ -97,6 +167,11 @@
       const copyToClipboard = () => {
         setClipboard(oooMsg.innerText);
       };
+
+      // Initialization
+      oooFrom.valueAsNumber = Date.now();
+      oooUntil.valueAsNumber = Date.now();
+      generate();
     </script>
   </body>
 </html>
