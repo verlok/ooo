@@ -15,7 +15,6 @@
         box-sizing: inherit;
       }
       body {
-        max-width: 500px;
         margin: 1rem auto;
         padding: 0 1rem;
         font-family: Helvetica, Arial, sans-serif;
@@ -28,6 +27,7 @@
         font: inherit;
         padding: 3px;
         width: 100%;
+        border: 1px solid #00000085;
       }
       label {
         cursor: pointer;
@@ -37,86 +37,116 @@
       }
       button {
         padding: 0.5rem 1rem;
-        border: 1px solid #00000085;
+        background-color: lightgray;
+        color: black;
+        flex-grow: 1;
       }
       button:first-child {
         margin-right: 0.5rem;
-        background-color: blue;
-        color: white;
         flex-basis: 38%;
-        flex-grow: 1;
       }
       button:last-child {
-        background-color: lightgray;
-        color: #333;
         flex-basis: 62%;
-        flex-grow: 1;
       }
       .row {
         margin: 1rem 0;
       }
+      .row:first-child {
+        margin-top: 0;
+      }
       #oooMsg {
         padding: 0 1rem;
-        border: 1px solid #ccc;
         display: block;
-        box-shadow: inset 0 3px 3px #0003;
+        border: 1px solid #00000085;
+      }
+
+      @media (min-width: 500px) {
+        .container {
+          display: flex;
+          margin: 1rem 0;
+        }
+        .form {
+          flex-basis: 50%;
+          margin-right: 1rem;
+        }
+        .output {
+          flex-basis: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        #oooMsg {
+          flex-grow: 1;
+        }
       }
     </style>
   </head>
   <body>
     <h1>Out of office message generator</h1>
 
-    <div class="row">
-      <label for="oooFrom">Out from</label><br />
-      <input type="date" id="oooFrom" onchange="generate()" /><br />
-      <label for="oooUntil">until</label><br />
-      <input type="date" id="oooUntil" onchange="generate()" />
-    </div>
-    <div class="row">
-      <input type="checkbox" id="accessToEmail" checked onchange="generate()" />
-      <label for="accessToEmail">Access to e-mail</label>
-    </div>
-    <div class="row">
-      <label for="urgentPhone">Mobile for urgency</label><br />
-      <input
-        type="tel"
-        id="urgentPhone"
-        placeholder="+39.321.1231231"
-        onchange="generate()"
-      />
-    </div>
-    <div class="row">
-      <label for="immediateEmail">Contact for immediate assistance</label><br />
-      <input
-        type="email"
-        id="immediateEmail"
-        placeholder="another.person@domain.com"
-        onchange="generate()"
-      />
-    </div>
-    <div class="row">
-      <label for="signature">Signature</label><br />
-      <input
-        type="text"
-        name="name"
-        autocomplete="name"
-        id="signature"
-        placeholder="Name Surname"
-        onchange="generate()"
-      />
-    </div>
-    <div class="buttons row">
-      <button id="generate" onclick="generate()">Generate</button>
-      <button id="copyToClipboard" onclick="copyToClipboard()">
-        Copy to clipboard <span class="status"></span>
-      </button>
-    </div>
+    <div class="container">
+      <div class="form">
+        <div class="row">
+          <label for="oooFrom">Out from</label><br />
+          <input type="date" id="oooFrom" onchange="generate()" /><br />
+          <label for="oooUntil">until</label><br />
+          <input type="date" id="oooUntil" onchange="generate()" />
+        </div>
+        <div class="row">
+          <input
+            type="checkbox"
+            id="accessToEmail"
+            checked
+            onchange="generate()"
+          />
+          <label for="accessToEmail">Access to e-mail</label>
+        </div>
+        <div class="row">
+          <label for="urgentPhone">Mobile for urgency</label><br />
+          <input
+            type="tel"
+            id="urgentPhone"
+            placeholder="+39.321.1231231"
+            onchange="generate()"
+          />
+        </div>
+        <div class="row">
+          <label for="immediateEmail">Contact for immediate assistance</label
+          ><br />
+          <input
+            type="email"
+            id="immediateEmail"
+            placeholder="another.person@domain.com"
+            onchange="generate()"
+          />
+        </div>
+        <div class="row">
+          <label for="signature">Signature</label><br />
+          <input
+            type="text"
+            name="name"
+            autocomplete="name"
+            id="signature"
+            placeholder="Name Surname"
+            onchange="generate()"
+          />
+        </div>
+        <div class="buttons row">
+          <button id="generate" onclick="generate()">Generate</button>
+          <button id="copyToClipboard" onclick="copyToClipboard()">
+            Copy to clipboard <span class="status"></span>
+          </button>
+        </div>
+      </div>
 
-    <h2>Here's your generated OOO message</h2>
-    <output id="oooMsg" contenteditable>
-      <p>Your OOO message will appear here</p>
-    </output>
-    <p>Enjoy your leave 👋</p>
+      <div class="output">
+        Here's your generated OOO message<br />
+        <output id="oooMsg" contenteditable>
+          <p>Your OOO message will appear here</p>
+        </output>
+        <p>Enjoy your leave 👋</p>
+      </div>
+    </div>
 
     <script>
       var clipboardStatusTimeout;
