@@ -2,4 +2,9 @@
 
 Automatically generate your out of office messages. Ready to copy and paste.
 
-[Live here](https://verlok.github.io/ooo)
+You can either:
+
+- [Use it live](https://verlok.github.io/ooo)
+- Download this (it's a single html file) and customize it with your personal data
+
+Enjoy your leave 👋
