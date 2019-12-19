@@ -20,7 +20,7 @@ Parameters you can pass:
 Example URL:
 
 ```
-https://www.andreaverlicchi.eu/ooo/?immediateEmail=workmate.buddy@domain.com&signature=Your+Name
+https://verlok.github.io/ooo/?immediateEmail=workmate.buddy@domain.com&signature=Your+Name
 ```
 
 ## Use it offline
