@@ -205,9 +205,20 @@
         setClipboard(oooMsg.innerText);
       };
 
-      // Initialization
-      oooFrom.valueAsNumber = Date.now();
-      oooUntil.valueAsNumber = Date.now();
+      const initialize = () => {
+        // Initialization
+        oooFrom.valueAsNumber = Date.now();
+        oooUntil.valueAsNumber = Date.now();
+
+        // Get values from QueryString
+        const urlParams = new URLSearchParams(window.location.search);
+        immediateEmail.value = urlParams.get("immediateEmail");
+        signature.value = urlParams.get("signature");
+        urgentPhone.value = urlParams.get("urgentPhone");
+        accessToEmail.checked = urlParams.get("accessToEmail") === "yes";
+      };
+
+      initialize();
       generate();
     </script>
   </body>
