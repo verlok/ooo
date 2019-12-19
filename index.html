@@ -65,6 +65,7 @@
   </head>
   <body>
     <h1>Out of office message generator</h1>
+
     <div class="row">
       <label for="oooFrom">Out from</label><br />
       <input type="date" id="oooFrom" onchange="generate()" /><br />
@@ -77,14 +78,19 @@
     </div>
     <div class="row">
       <label for="urgentPhone">Mobile for urgency</label><br />
-      <input type="tel" id="urgentPhone" onchange="generate()" />
+      <input
+        type="tel"
+        id="urgentPhone"
+        placeholder="+39.321.1231231"
+        onchange="generate()"
+      />
     </div>
     <div class="row">
       <label for="immediateEmail">Contact for immediate assistance</label><br />
       <input
         type="email"
         id="immediateEmail"
-        value="marty.mcfly@present.com"
+        placeholder="another.person@domain.com"
         onchange="generate()"
       />
     </div>
@@ -92,8 +98,10 @@
       <label for="signature">Signature</label><br />
       <input
         type="text"
+        name="name"
+        autocomplete="name"
         id="signature"
-        value='Dr. Emmett "Doc" Brown'
+        placeholder="Name Surname"
         onchange="generate()"
       />
     </div>
