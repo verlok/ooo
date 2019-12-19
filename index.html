@@ -136,9 +136,22 @@
         return `<p>If your matter requires my urgent attention, you can reach me directly on ${value}</p>`;
       };
 
+      const formatDate = dateString => {
+        const date = new Date(dateString);
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        };
+        return date.toLocaleDateString("en-gb", options);
+      };
+
       const getTimeSpanMsg = (from, until) => {
         const isOneDay = from === until;
-        return isOneDay ? `on ${from}` : `from ${from} until ${until}`;
+        return isOneDay
+          ? `on ${formatDate(from)}`
+          : `from ${formatDate(from)} until ${formatDate(until)}`;
       };
 
       const getSignature = value => {
