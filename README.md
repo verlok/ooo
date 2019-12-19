@@ -13,7 +13,7 @@ It also takes parameters from the URL:
 - `immediateEmail` - another person's email, e.g. `workmate@company.com`
 - `signature` - typically your name, e.g `signature=John+Doe`
 - `urgentPhone` - the phone number you want to be reached at, e.g. `+39.321.1234567`
-- `accessToEmail` - pass `yes` if you'll have access to your email, any other value (or nothing) if you won't
+- `accessToEmail` - whether or not you'll have access to your email. Pass `yes` if you will, any other value (or nothing) if you won't
 
 Example URL:
 
