@@ -27,6 +27,9 @@ https://verlok.github.io/ooo/?immediateEmail=workmate.buddy@domain.com&signature
 
 It's a single HTML file, so you can also save it, edit as you wish, send it to others.
 
+
+## Contributing
+
 **Pull requests are welcome, as usual**
 
 Enjoy your leave 👋
