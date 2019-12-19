@@ -23,7 +23,8 @@
       input[type="text"],
       input[type="email"],
       input[type="tel"],
-      input[type="date"] {
+      input[type="date"],
+      button {
         font: inherit;
         padding: 3px;
         width: 100%;
@@ -36,16 +37,19 @@
       }
       button {
         padding: 0.5rem 1rem;
-        flex-grow: 1;
       }
       button:first-child {
         margin-right: 0.5rem;
         background-color: blue;
         color: white;
+        flex-basis: 38%;
+        flex-grow: 1;
       }
       button:last-child {
-        background-color: darkslategray;
-        color: white;
+        background-color: lightgray;
+        color: #333;
+        flex-basis: 62%;
+        flex-grow: 1;
       }
       .row {
         margin: 1rem 0;
