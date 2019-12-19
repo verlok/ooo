@@ -10,10 +10,10 @@ Automatically generate your out of office messages. Ready to copy and paste.
 
 It also takes parameters from the URL:
 
-- immediateEmail (another person's email)
-- signature (typically your name)
-- urgentPhone (the phone number you want to be reached at)
-- accessToEmail (pass `yes` if you have access to your email)
+- `immediateEmail` - another person's email, e.g. `workmate@company.com`
+- `signature` - typically your name, e.g `signature=John+Doe`
+- `urgentPhone` - the phone number you want to be reached at, e.g. `+39.321.1234567`
+- `accessToEmail` - pass `yes` if you'll have access to your email, any other value (or nothing) if you won't
 
 Example URL:
 
