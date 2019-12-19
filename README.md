@@ -4,7 +4,7 @@ Automatically generate your out of office messages. Ready to copy and paste.
 
 ## Online or offline
 
-**Use it online**
+#### Use it online
 
 ➡ [Open this online](https://verlok.github.io/ooo)
 
@@ -23,7 +23,7 @@ https://verlok.github.io/ooo/?immediateEmail=workmate.buddy@domain.com&signature
 
 You can store the composed URL in your browser's bookmarks, to **avoid filling your data each time**.
 
-**Or use it offline**
+#### Or use it offline
 
 It's a single HTML file, so you can download it, edit it as you wish, and even send it to others.
 
