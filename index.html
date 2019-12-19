@@ -99,7 +99,7 @@
     <div class="buttons row">
       <button id="generate" onclick="generate()">Generate</button>
       <button id="copyToClipboard" onclick="copyToClipboard()">
-        Copy to clipboard
+        Copy to clipboard <span class="status"></span>
       </button>
     </div>
 
@@ -110,12 +110,16 @@
     <p>Enjoy your leave 👋</p>
 
     <script>
+      var clipboardStatusTimeout;
       const oooFrom = document.getElementById("oooFrom");
       const oooUntil = document.getElementById("oooUntil");
       const oooMsg = document.getElementById("oooMsg");
       const accessToEmail = document.getElementById("accessToEmail");
       const urgentPhone = document.getElementById("urgentPhone");
       const immediateEmail = document.getElementById("immediateEmail");
+      const copyToClipboardStatus = document.querySelector(
+        "#copyToClipboard .status"
+      );
 
       const getImmediateAssistanceMsg = (value, from, until) => {
         if (!value) return "";
@@ -163,12 +167,16 @@
       const setClipboard = text => {
         navigator.clipboard.writeText(text).then(
           () => {
-            console.log("Async: Copying to clipboard was successful!");
+            copyToClipboardStatus.innerText = "👍";
           },
           err => {
-            console.error("Async: Could not copy text: ", err);
+            copyToClipboardStatus.innerText = "❌";
           }
         );
+        clearTimeout(clipboardStatusTimeout);
+        clipboardStatusTimeout = setTimeout(() => {
+          copyToClipboardStatus.innerText = "";
+        }, 1000);
       };
 
       const copyToClipboard = () => {
