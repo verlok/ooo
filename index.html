@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>OOO msg generator</title>
     <style>
+      @keyframes swing {
+        from {
+          transform: rotate(-30deg);
+        }
+        to {
+          transform: rotate(30deg);
+        }
+      }
+
       html {
         box-sizing: border-box;
       }
@@ -68,6 +77,11 @@
         margin-left: 0.5em;
         position: absolute;
         top: 3px;
+        animation: swing 1s infinite ease-in-out;
+        /* animation-timing-function: ease-in-out;
+        animation-duration: 1s;
+        animation-direction: alternate;*/
+        transform-origin: center bottom;
       }
 
       @media (min-width: 500px) {
