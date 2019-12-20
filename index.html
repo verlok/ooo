@@ -237,22 +237,30 @@
         );
       };
 
-      function iosCopyToClipboard(elementToCopy) {
-        const range = document.createRange();
-        range.selectNodeContents(elementToCopy);
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        elementToCopy.setSelectionRange(0, 999999);
-        document.execCommand("copy");
-        setClipboardStatus("👍?");
-      }
+      const fallbackCopyTextToClipboard = text => {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          var successful = document.execCommand("copy");
+          setClipboardStatus(successful ? "👍" : "❌");
+        } catch (err) {
+          setClipboardStatus("❌");
+        }
+
+        document.body.removeChild(textArea);
+      };
 
       const copyToClipboard = () => {
+        const text = oooMsg.innerText;
         if ("clipboard" in navigator) {
-          modernCopyToClipboard(oooMsg.innerText);
+          modernCopyToClipboard(text);
         } else {
-          iosCopyToClipboard(oooMsg);
+          fallbackCopyTextToClipboard(text);
         }
       };
 
