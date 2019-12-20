@@ -26,9 +26,10 @@
       input[type="date"],
       button {
         font: inherit;
-        padding: 3px;
+        padding: 3px 5px;
         width: 100%;
         border: 1px solid #00000085;
+        min-height: 2rem;
       }
       label {
         cursor: pointer;
@@ -217,23 +218,42 @@
         `;
       };
 
-      const setClipboard = text => {
-        navigator.clipboard.writeText(text).then(
-          () => {
-            copyToClipboardStatus.innerText = "👍";
-          },
-          err => {
-            copyToClipboardStatus.innerText = "❌";
-          }
-        );
+      const setClipboardStatus = status => {
+        copyToClipboardStatus.innerText = status;
         clearTimeout(clipboardStatusTimeout);
         clipboardStatusTimeout = setTimeout(() => {
           copyToClipboardStatus.innerText = "";
         }, 1000);
       };
 
+      const modernCopyToClipboard = text => {
+        navigator.clipboard.writeText(text).then(
+          () => {
+            setClipboardStatus("👍");
+          },
+          err => {
+            setClipboardStatus("❌");
+          }
+        );
+      };
+
+      function iosCopyToClipboard(elementToCopy) {
+        const range = document.createRange();
+        range.selectNodeContents(elementToCopy);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        elementToCopy.setSelectionRange(0, 999999);
+        document.execCommand("copy");
+        setClipboardStatus("👍?");
+      }
+
       const copyToClipboard = () => {
-        setClipboard(oooMsg.innerText);
+        if ("clipboard" in navigator) {
+          modernCopyToClipboard(oooMsg.innerText);
+        } else {
+          iosCopyToClipboard(oooMsg);
+        }
       };
 
       const initialize = () => {
