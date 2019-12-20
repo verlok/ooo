@@ -166,14 +166,15 @@
         if (!value) return "";
         const isOneDay = from === until;
         const whenImOoo = isOneDay
-          ? "If you need immediate assistance"
+          ? "If you require immediate assistance"
           : "In my absence";
-        return `<p>${whenImOoo}, please contact ${value}.</p>`;
+        const sentenceEnding = isOneDay ? "." : " for further assistance.";
+        return `<p>${whenImOoo}, please contact ${value}${sentenceEnding}</p>`;
       };
 
       const getUrgentMobileMsg = value => {
         if (!value) return "";
-        return `<p>If your matter requires my urgent attention, you can reach me directly on ${value}</p>`;
+        return `<p>If your matter requires my urgent attention, you can reach me directly on ${value}.</p>`;
       };
 
       const formatDate = dateString => {
@@ -194,16 +195,11 @@
           : `from ${formatDate(from)} until ${formatDate(until)}`;
       };
 
-      const getSignature = value => {
-        if (!value) return "";
-        return `<p>${value}</p>`;
-      };
-
       const generate = () => {
         oooMsg.innerHTML = `
           <p>Hi,<br>
           thanks for getting in touch.</p>
-          <p>I will be out of office
+          <p>I will be out of the office 
             ${getTimeSpanMsg(oooFrom.value, oooUntil.value)}
             with ${accessToEmail.checked ? "limited" : "no"}
             access to e-mail.</p>
@@ -214,7 +210,8 @@
               oooUntil.value
             )}</p>
             ${getUrgentMobileMsg(urgentPhone.value)}
-            ${getSignature(signature.value)}
+            <p>Many thanks,<br>
+            ${signature.value}</p>
         `;
       };
 
