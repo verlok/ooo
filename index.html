@@ -77,11 +77,13 @@
         margin-left: 0.5em;
         position: absolute;
         top: 3px;
-        animation: swing 1s infinite ease-in-out;
-        /* animation-timing-function: ease-in-out;
-        animation-duration: 1s;
-        animation-direction: alternate;*/
+      }
+      .enjoy__hand {
+        display: inline-block;
         transform-origin: center bottom;
+      }
+      .swing {
+        animation: swing 1s infinite alternate ease-in-out;
       }
 
       @media (min-width: 500px) {
@@ -168,7 +170,9 @@
         <output id="oooMsg" contenteditable>
           <p>Your OOO message will appear here</p>
         </output>
-        <p>Enjoy your leave 👋</p>
+        <p class="enjoy">
+          Enjoy your leave <span class="enjoy__hand swing">👋</span>
+        </p>
       </div>
     </div>
 
