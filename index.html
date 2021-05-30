@@ -1,247 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>OOO msg generator</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>OOO msg generator</title>
 
-  <!-- STYLE -->
-  <style>
-    @keyframes swing {
-      from {
-        transform: rotate(-30deg);
+    <!-- STYLE -->
+    <style>
+      @keyframes swing {
+        from {
+          transform: rotate(-30deg);
+        }
+        to {
+          transform: rotate(30deg);
+        }
       }
-      to {
-        transform: rotate(30deg);
+
+      html {
+        box-sizing: border-box;
       }
-    }
-
-    html {
-      box-sizing: border-box;
-    }
-    *,
-    *::after,
-    *::before {
-      box-sizing: inherit;
-    }
-    body {
-      max-width: 1000px;
-      margin: 1rem auto;
-      padding: 0 1rem;
-      font-family: Helvetica, Arial, sans-serif;
-    }
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    input[type="date"],
-    button {
-      font: inherit;
-      padding: 3px 5px;
-      width: 100%;
-      border: 1px solid #00000085;
-      min-height: 2rem;
-    }
-    label {
-      cursor: pointer;
-    }
-    .buttons {
-      display: flex;
-    }
-    button {
-      padding: 0.5rem 1rem;
-      background-color: lightgray;
-      color: black;
-      flex-grow: 1;
-    }
-    button:first-child {
-      margin-right: 0.5rem;
-      flex-basis: 38%;
-    }
-    button:last-child {
-      flex-basis: 62%;
-    }
-    .row {
-      margin: 1rem 0;
-    }
-    .row:first-child {
-      margin-top: 0;
-    }
-    #oooMsg {
-      padding: 0 1rem;
-      display: block;
-      border: 1px solid #00000085;
-    }
-    #copyToClipboard {
-      position: relative;
-    }
-    #copyToClipboard .status {
-      margin-left: 0.5em;
-      position: absolute;
-      top: 3px;
-    }
-    .closing {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .github {
-      color: black;
-      text-decoration-color: darkgray;
-    }
-    .github__logo {
-      width: 16px;
-      height: 16px;
-      vertical-align: text-top;
-      display: inline-block;
-    }
-    .enjoy {
-      position: relative;
-      padding-left: 1.3em;
-    }
-    .enjoy__hand {
-      display: inline-block;
-      transform-origin: 12px 20px;
-      animation: swing 1s infinite alternate ease-in-out;
-      position: absolute;
-      left: 0;
-      top: -6px;
-    }
-
-    @media (min-width: 500px) {
-      .container {
+      *,
+      *::after,
+      *::before {
+        box-sizing: inherit;
+      }
+      body {
+        max-width: 1000px;
+        margin: 1rem auto;
+        padding: 0 1rem;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"],
+      button {
+        font: inherit;
+        padding: 3px 5px;
+        width: 100%;
+        border: 1px solid #00000085;
+        min-height: 2rem;
+      }
+      label {
+        cursor: pointer;
+      }
+      .buttons {
         display: flex;
-        margin: 1rem 0;
       }
-      .form {
-        flex-basis: 50%;
-        margin-right: 1rem;
-      }
-      .output {
-        flex-basis: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      #oooMsg {
+      button {
+        padding: 0.5rem 1rem;
+        background-color: lightgray;
+        color: black;
         flex-grow: 1;
       }
-    }
-  </style>
-</head>
+      button:first-child {
+        margin-right: 0.5rem;
+        flex-basis: 38%;
+      }
+      button:last-child {
+        flex-basis: 62%;
+      }
+      .row {
+        margin: 1rem 0;
+      }
+      .row:first-child {
+        margin-top: 0;
+      }
+      #oooMsg {
+        padding: 0 1rem;
+        display: block;
+        border: 1px solid #00000085;
+      }
+      #copyToClipboard {
+        position: relative;
+      }
+      #copyToClipboard .status {
+        margin-left: 0.5em;
+        position: absolute;
+        top: 3px;
+      }
+      .closing {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .github {
+        color: black;
+        text-decoration-color: darkgray;
+      }
+      .github__logo {
+        width: 16px;
+        height: 16px;
+        vertical-align: text-top;
+        display: inline-block;
+      }
+      .enjoy {
+        position: relative;
+        padding-left: 1.3em;
+      }
+      .enjoy__hand {
+        display: inline-block;
+        transform-origin: 12px 20px;
+        animation: swing 1s infinite alternate ease-in-out;
+        position: absolute;
+        left: 0;
+        top: -6px;
+      }
 
-<!-- MARKUP -->
-<body>
-  <svg style="display: none;" viewBox="0 0 16 16">
-    <defs>
+      @media (min-width: 500px) {
+        .container {
+          display: flex;
+          margin: 1rem 0;
+        }
+        .form {
+          flex-basis: 50%;
+          margin-right: 1rem;
+        }
+        .output {
+          flex-basis: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        #oooMsg {
+          flex-grow: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <!-- MARKUP -->
+  <body>
+    <svg style="display: none;" viewBox="0 0 16 16">
+      <defs>
         <path
           id="github"
           fill="#000"
           d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"
         ></path>
-    </defs>
-  </svg>
-  <h1>Out of office message generator</h1>
-  <div class="container">
-    <div class="form">
-      <div class="row">
-        <label for="oooFrom">Out from</label><br />
-        <input type="datetime-local" id="oooFrom" onchange="generate()" /><br />
-        <label for="oooUntil">until</label><br />
-        <input type="datetime-local" id="oooUntil" onchange="generate()" />
+      </defs>
+    </svg>
+    <h1>Out of office message generator</h1>
+    <div class="container">
+      <div class="form">
+        <div class="row">
+          <label for="oooFrom">Out from</label><br />
+          <input type="date" id="oooFrom" onchange="generate()" /><br />
+          <label for="oooUntil">until</label><br />
+          <input type="date" id="oooUntil" onchange="generate()" />
+        </div>
+        <div class="row">
+          <input
+            type="checkbox"
+            id="accessToEmail"
+            checked
+            onchange="generate()"
+          />
+          <label for="accessToEmail">I will have access to my e-mail</label>
+        </div>
+        <div class="row">
+          <label for="urgentPhone">Mobile for urgency</label><br />
+          <input
+            type="tel"
+            id="urgentPhone"
+            placeholder="+39.321.1231231"
+            onchange="generate()"
+          />
+        </div>
+        <div class="row">
+          <label for="immediateEmail">Contact for immediate assistance</label
+          ><br />
+          <input
+            type="email"
+            id="immediateEmail"
+            placeholder="another.person@domain.com"
+            onchange="generate()"
+          />
+        </div>
+        <div class="row">
+          <label for="signature">Signature</label><br />
+          <input
+            type="text"
+            name="name"
+            autocomplete="name"
+            id="signature"
+            placeholder="Name Surname"
+            onchange="generate()"
+          />
+        </div>
+        <div class="buttons row">
+          <button id="generate" onclick="generate()">Generate</button>
+          <button id="copyToClipboard" onclick="copyToClipboard()">
+            Copy to clipboard <span class="status"></span>
+          </button>
+        </div>
       </div>
-      <div class="row">
-        <input type="checkbox" id="accessToEmail" checked onchange="generate()" />
-        <label for="accessToEmail">I will have access to my e-mail</label>
-      </div>
-      <div class="row">
-        <label for="urgentPhone">Mobile for urgency</label><br />
-        <input type="tel" id="urgentPhone" placeholder="+39.321.1231231" onchange="generate()" />
-      </div>
-      <div class="row">
-        <label for="immediateEmail">Contact for immediate assistance</label><br />
-        <input type="email" id="immediateEmail" placeholder="another.person@domain.com" onchange="generate()" />
-      </div>
-      <div class="row">
-        <label for="signature">Signature</label><br />
-        <input type="text" name="name" autocomplete="name" id="signature" placeholder="Name Surname"
-          onchange="generate()" />
-      </div>
-      <div class="buttons row">
-        <button id="generate" onclick="generate()">Generate</button>
-        <button id="copyToClipboard" onclick="copyToClipboard()">
-          Copy to clipboard <span class="status"></span>
-        </button>
-      </div>
-    </div>
 
-    <div class="output">
-      Here's your generated OOO message<br />
-      <output id="oooMsg" contenteditable>
-        <p>Your OOO message will appear here</p>
-      </output>
-      <div class="closing">
-        <p>
+      <div class="output">
+        Here's your generated OOO message<br />
+        <output id="oooMsg" contenteditable>
+          <p>Your OOO message will appear here</p>
+        </output>
+        <div class="closing">
+          <p>
             <a class="github" href="https://www.github.com/verlok/ooo"
               >This on
-            <svg class="github__logo">
-              <use href="#github" />
-            </svg>
-            Github
-          </a>
-        </p>
-        <p class="enjoy">
-          <span class="enjoy__hand">👋</span> Enjoy your leave!
-        </p>
+              <svg class="github__logo">
+                <use href="#github" />
+              </svg>
+              Github
+            </a>
+          </p>
+          <p class="enjoy">
+            <span class="enjoy__hand">👋</span> Enjoy your leave!
+          </p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- SCRIPT -->
-  <script>
-    var clipboardStatusTimeout;
-    const oooFrom = document.getElementById("oooFrom");
-    const oooUntil = document.getElementById("oooUntil");
-    const oooMsg = document.getElementById("oooMsg");
-    const accessToEmail = document.getElementById("accessToEmail");
-    const urgentPhone = document.getElementById("urgentPhone");
-    const immediateEmail = document.getElementById("immediateEmail");
-    const copyToClipboardStatus = document.querySelector(
-      "#copyToClipboard .status"
-    );
+    <!-- SCRIPT -->
+    <script>
+      var clipboardStatusTimeout;
+      const oooFrom = document.getElementById("oooFrom");
+      const oooUntil = document.getElementById("oooUntil");
+      const oooMsg = document.getElementById("oooMsg");
+      const accessToEmail = document.getElementById("accessToEmail");
+      const urgentPhone = document.getElementById("urgentPhone");
+      const immediateEmail = document.getElementById("immediateEmail");
+      const copyToClipboardStatus = document.querySelector(
+        "#copyToClipboard .status"
+      );
 
-    const getImmediateAssistanceMsg = (value, from, until) => {
-      if (!value) return "";
-      const isOneDay = from === until;
-      const whenImOoo = isOneDay
-        ? "If you require immediate assistance"
-        : "In my absence";
-      const sentenceEnding = isOneDay ? "." : " for further assistance.";
-      return `<p>${whenImOoo}, please contact ${value}${sentenceEnding}</p>`;
-    };
+      const getImmediateAssistanceMsg = (value, from, until) => {
+        if (!value) return "";
+        const isOneDay = from === until;
+        const whenImOoo = isOneDay
+          ? "If you require immediate assistance"
+          : "In my absence";
+        const sentenceEnding = isOneDay ? "." : " for further assistance.";
+        return `<p>${whenImOoo}, please contact ${value}${sentenceEnding}</p>`;
+      };
 
-    const getUrgentMobileMsg = value => {
-      if (!value) return "";
-      return `<p>If your matter requires my urgent attention, you can reach me directly on ${value}.</p>`;
-    };
+      const getUrgentMobileMsg = value => {
+        if (!value) return "";
+        return `<p>If your matter requires my urgent attention, you can reach me directly on ${value}.</p>`;
+      };
 
-    const formatDate = (dateString, withTime) => {
-      const date = new Date(dateString);
-      return withTime
-        ? date.toLocaleTimeString("en-GB")
-        : date.toLocaleDateString("en-GB");
-    };
+      const formatDate = dateString => {
+        const date = new Date(dateString);
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        };
+        return date.toLocaleDateString("en-gb", options);
+      };
 
-    const getTimeSpanMsg = (from, until) => {
-      const isOneDay = from === until;
-      const withTime = from.split('T')[1] !== "00:00" || until.split('T')[1] !== "00:00"
-      return isOneDay
-        ? `on ${formatDate(from, false)}`
-        : `from ${formatDate(from, withTime)} until ${formatDate(until, withTime)}`;
-    };
+      const getTimeSpanMsg = (from, until) => {
+        const isOneDay = from === until;
+        return isOneDay
+          ? `on ${formatDate(from)}`
+          : `from ${formatDate(from)} until ${formatDate(until)}`;
+      };
 
-    const generate = () => {
-      oooMsg.innerHTML = `
+      const generate = () => {
+        oooMsg.innerHTML = `
           <p>Hi,<br>
           thanks for getting in touch.</p>
           <p>I will be out of the office 
@@ -250,79 +275,77 @@
             access to e-mail.</p>
             <p>I will respond to your email upon my return.
             ${getImmediateAssistanceMsg(
-        immediateEmail.value,
-        oooFrom.value,
-        oooUntil.value
-      )}</p>
+              immediateEmail.value,
+              oooFrom.value,
+              oooUntil.value
+            )}</p>
             ${getUrgentMobileMsg(urgentPhone.value)}
             <p>Many thanks,<br>
             ${signature.value}</p>
         `;
-    };
+      };
 
-    const setClipboardStatus = status => {
-      copyToClipboardStatus.innerText = status;
-      clearTimeout(clipboardStatusTimeout);
-      clipboardStatusTimeout = setTimeout(() => {
-        copyToClipboardStatus.innerText = "";
-      }, 1000);
-    };
+      const setClipboardStatus = status => {
+        copyToClipboardStatus.innerText = status;
+        clearTimeout(clipboardStatusTimeout);
+        clipboardStatusTimeout = setTimeout(() => {
+          copyToClipboardStatus.innerText = "";
+        }, 1000);
+      };
 
-    const modernCopyToClipboard = text => {
-      navigator.clipboard.writeText(text).then(
-        () => {
-          setClipboardStatus("👍");
-        },
-        err => {
+      const modernCopyToClipboard = text => {
+        navigator.clipboard.writeText(text).then(
+          () => {
+            setClipboardStatus("👍");
+          },
+          err => {
+            setClipboardStatus("❌");
+          }
+        );
+      };
+
+      const fallbackCopyTextToClipboard = text => {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          var successful = document.execCommand("copy");
+          setClipboardStatus(successful ? "👍" : "❌");
+        } catch (err) {
           setClipboardStatus("❌");
         }
-      );
-    };
 
-    const fallbackCopyTextToClipboard = text => {
-      var textArea = document.createElement("textarea");
-      textArea.value = text;
-      textArea.style.position = "fixed";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
+        document.body.removeChild(textArea);
+      };
 
-      try {
-        var successful = document.execCommand("copy");
-        setClipboardStatus(successful ? "👍" : "❌");
-      } catch (err) {
-        setClipboardStatus("❌");
-      }
+      const copyToClipboard = () => {
+        const text = oooMsg.innerText;
+        if ("clipboard" in navigator) {
+          modernCopyToClipboard(text);
+        } else {
+          fallbackCopyTextToClipboard(text);
+        }
+      };
 
-      document.body.removeChild(textArea);
-    };
+      const initialize = () => {
+        // Initialization
+        oooFrom.valueAsNumber = Date.now();
+        oooUntil.valueAsNumber = Date.now();
 
-    const copyToClipboard = () => {
-      const text = oooMsg.innerText;
-      if ("clipboard" in navigator) {
-        modernCopyToClipboard(text);
-      } else {
-        fallbackCopyTextToClipboard(text);
-      }
-    };
+        // Get values from QueryString
+        const urlParams = new URLSearchParams(window.location.search);
+        immediateEmail.value = urlParams.get("immediateEmail");
+        signature.value = urlParams.get("signature");
+        urgentPhone.value = urlParams.get("urgentPhone");
+        accessToEmail.checked = urlParams.get("accessToEmail") === "yes";
+      };
 
-    const initialize = () => {
-      // Initialization
-      const date = new Date();
-      const currentDate = `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${date.getDate()}T00:00`;
-      oooFrom.value = currentDate;
-      oooUntil.value = currentDate;
-
-      // Get values from QueryString
-      const urlParams = new URLSearchParams(window.location.search);
-      immediateEmail.value = urlParams.get("immediateEmail");
-      signature.value = urlParams.get("signature");
-      urgentPhone.value = urlParams.get("urgentPhone");
-      accessToEmail.checked = urlParams.get("accessToEmail") === "yes";
-    };
-
-    initialize();
-    generate();
-  </script>
-</body>
+      initialize();
+      generate();
+    </script>
+  </body>
 </html>
